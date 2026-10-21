@@ -1,0 +1,108 @@
+/* reseteo basico pa q no hayan margenes raros por defecto */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    /* le meti un fondo oscuro casi negro pa q se vea mas pro q el blanco del  */
+    background-color: #121212; 
+    padding: 40px 20px;
+    display: flex;
+    justify-content: center;
+}
+
+/* aca armo la cuadricula principal */
+.contenedor-galeria {
+    display: grid;
+    /* 3 columnas q se reparten el espacio  */
+    grid-template-columns: repeat(3, 1fr);
+    /* 3 filas q definen la altura base pa q cuadre el diseño asimetrico */
+    grid-template-rows: repeat(3, 200px);
+    gap: 20px; /* separacion entre las fotos */
+    max-width: 1000px;
+    width: 100%;
+}
+
+/* estilo general pa los contenedores de las fotos */
+.item-foto {
+    border-radius: 12px; /* bordes redondos */
+    overflow: hidden;
+    /* una sombrita */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    transition: transform 0.3s;
+}
+
+/* hover pa q la foto salte un poquito cuando le pasan el mouse */
+.item-foto:hover {
+    transform: scale(1.02);
+}
+
+/* q la imagen ocupe todo su cuadrito sin deformarse */
+.imagen-fluida {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* ACA VIENE DEL GRID (ubicando cada foto) */
+
+/* columna 1:  */
+.foto-roca {
+    grid-column: 1;
+    grid-row: 1 / 3; /* ocupa fila 1 y 2 */
+}
+.foto-sala {
+    grid-column: 1;
+    grid-row: 3 / 4; /* ocupa solo fila 3 */
+}
+
+/* columna 2: */
+.foto-comida {
+    grid-column: 2;
+    grid-row: 1 / 2; /* ocupa solo fila 1 */
+}
+.foto-puerta {
+    grid-column: 2;
+    grid-row: 2 / 4; /* ocupa fila 2 y 3 */
+}
+
+/* columna 3: */
+.foto-aptos {
+    grid-column: 3;
+    grid-row: 1 / 3; /* ocupa fila 1 y 2 */
+}
+.foto-playa {
+    grid-column: 3;
+    grid-row: 3 / 4; /* ocupa solo fila 3 */
+}
+
+
+/* --- RESPONSIVE PA CELUS Y TABLETS --- */
+ 
+
+/* pa tablets */
+@media (max-width: 900px) {
+    .contenedor-galeria {
+        /* lo bajo a 2 columnas */
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: auto; /* q la altura sea automatica */
+    }
+    
+    /* reseteo las filas pa q se acomoden solas en la tablet y no se rompa el diseño */
+    .foto-roca, .foto-sala, .foto-comida, .foto-puerta, .foto-aptos, .foto-playa {
+        grid-column: auto;
+        grid-row: auto;
+        height: 300px; /* altura fija pa q no se vea raro */
+    }
+}
+
+/* pa celulares */
+@media (max-width: 600px) {
+    .contenedor-galeria {
+        /* 1 sola columna pa q se vea bien en el cel */
+        grid-template-columns: 1fr; 
+    }
+}
